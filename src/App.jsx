@@ -4,14 +4,14 @@ import TodoInput from "./components/TodoInput";
 import Todolist from "./components/TodoList";
 import { Typography, CssBaseline, Box } from "@mui/material";
 
-const socket = io.connect("http://localhost:5001");
+const socket = io.connect("https://kazam-be-hmpw.onrender.com");
 
 const App = () => {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/fetchAllTasks")
+    fetch("https://kazam-be-hmpw.onrender.com/fetchAllTasks")
       .then((response) => response.json())
       .then((data) => setTasks(data));
 
