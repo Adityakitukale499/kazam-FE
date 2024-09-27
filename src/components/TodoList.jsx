@@ -1,19 +1,27 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';  // Import the icon
+import React from "react";
+import {
+  ListItem,
+  ListItemText,
+  IconButton,
+  ListItemSecondaryAction,
+} from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 function Todolist({ item, index, deleteItem }) {
   return (
-    <li className="list-item">
-      {item}
-      <span className='icons'>
-        <FontAwesomeIcon
-          icon={faTrashCan}
-          className="icon-delete"
+    <ListItem className="list-item">
+      <ListItemText primary={item} />
+      <ListItemSecondaryAction>
+        <IconButton
+          edge="end"
+          aria-label="delete"
           onClick={() => deleteItem(index)}
-        />
-      </span>
-    </li>
+        >
+          <FontAwesomeIcon icon={faTrashCan} />
+        </IconButton>
+      </ListItemSecondaryAction>
+    </ListItem>
   );
 }
 

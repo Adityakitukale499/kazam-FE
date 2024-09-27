@@ -1,4 +1,5 @@
 import React from "react";
+import { TextField, Button, Box } from "@mui/material";
 
 function TodoInput({ task, setTask, addTask }) {
   const handleEnterPress = (e) => {
@@ -8,19 +9,19 @@ function TodoInput({ task, setTask, addTask }) {
   };
 
   return (
-    <div className="input-container">
-      <input
-        type="text"
-        className="input-box-todo"
-        placeholder="New Note..."
+    <Box sx={{ display: "flex", justifyContent: "center", mb: "10px" }}>
+      <TextField
+        variant="outlined"
+        label="New Note..."
         value={task}
         onChange={(e) => setTask(e.target.value)}
         onKeyDown={handleEnterPress}
+        fullWidth
       />
-      <button className="add-btn" onClick={addTask}>
+      <Button variant="contained" color="primary" onClick={addTask}>
         +
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 }
 
