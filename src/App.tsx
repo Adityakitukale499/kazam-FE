@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import  {io, Socket } from "socket.io-client";
 import TodoInput from "./components/TodoInput";
 import Todolist from "./components/TodoList";
 import { Typography, CssBaseline, Box } from "@mui/material";
 
-const socket = io.connect("https://kazam-be-hmpw.onrender.com");
 
-const App = () => {
-  const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+type Task = string;
+
+const socket: Socket = io("https://kazam-be-hmpw.onrender.com");
+
+const App: React.FC = () => {
+  const [task, setTask] = useState<string>(""); 
+  const [tasks, setTasks] = useState<Task[]>([]); 
 
   useEffect(() => {
+    // http://localhost:8000
     fetch("https://kazam-be-hmpw.onrender.com/fetchAllTasks")
       .then((response) => response.json())
       .then((data) => setTasks(data));
 
-    socket.on("taskAdded", (newTask) => {
+    socket.on("taskAdded", (newTask: Task) => {
       setTasks((prevTasks) => [...prevTasks, newTask]);
     });
 
-    socket.on("taskDeleted", (deletedTaskIndex) => {
+    socket.on("taskDeleted", (deletedTaskIndex: number) => {
       setTasks((prevTasks) =>
         prevTasks.filter((_, i) => i !== deletedTaskIndex)
       );
@@ -38,7 +42,7 @@ const App = () => {
     }
   };
 
-  const deleteTask = (index) => {
+  const deleteTask = (index: number) => {
     socket.emit("deleteTask", index);
   };
 

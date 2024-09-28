@@ -8,7 +8,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-function Todolist({ item, index, deleteItem }) {
+
+interface TodolistProps {
+  item: string;
+  index: number;
+  deleteItem: (index: number) => void;
+}
+
+const Todolist: React.FC<TodolistProps> = ({ item, index, deleteItem }) => {
   return (
     <ListItem className="list-item">
       <ListItemText primary={item} />
@@ -23,6 +30,6 @@ function Todolist({ item, index, deleteItem }) {
       </ListItemSecondaryAction>
     </ListItem>
   );
-}
+};
 
 export default Todolist;
